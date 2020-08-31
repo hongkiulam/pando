@@ -34,9 +34,11 @@ a {
 }
 h1 {
   font-size: 2.5rem;
+  font-weight: 400;
 }
 h2 {
   font-size: 1.25px;
+  font-weight: 400;
 }
 small {
   font-size: 0.75px;
