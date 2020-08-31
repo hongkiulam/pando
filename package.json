@@ -2,15 +2,18 @@
   "name": "svelte-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public",
+    "build": "routify -b && rollup -c",
+    "predev": "npm run validate",
+    "dev": "routify -c dev-server",
+    "dev-server": "rollup -c -w",
+    "start": "sirv public --single",
     "validate": "svelte-check"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "@rollup/plugin-typescript": "^4.0.0",
+    "@sveltech/routify": "^1.9.9",
     "@tsconfig/svelte": "^1.0.0",
     "attractions": "^2.1.0",
     "node-sass": "^4.14.1",

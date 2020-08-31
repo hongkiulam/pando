@@ -18,3 +18,7 @@ body {
 a {
   text-decoration: none;
 }
+:root {
+  --primary: #dc9509;
+  --secondary: #007bce;
+}
