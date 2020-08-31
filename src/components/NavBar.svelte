@@ -1,7 +1,18 @@
 <script>
-  import { isActive, url } from "@sveltech/routify";
+  import { url } from "../store";
   import Button from "attractions/button";
-  import { HomeIcon, SlidersIcon, BarChartIcon } from "svelte-feather-icons";
+  import {
+    HomeIcon,
+    SlidersIcon,
+    BarChartIcon,
+    PlusIcon,
+  } from "svelte-feather-icons";
+
+  const items = [
+    ["/", HomeIcon],
+    ["/stats", BarChartIcon],
+    ["/settings", SlidersIcon],
+  ];
 </script>
 
 <style>
@@ -14,29 +25,51 @@
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
   }
+  .active {
+    color: var(--dark);
+  }
+  .icon-wrapper :global(svg) {
+    display: block;
+  }
   /* override button styles */
-  :global(.nav .btn.filled) {
+  .nav :global(.btn.filled) {
     box-shadow: none;
     background-image: none;
   }
-  :global(.nav .btn.filled:focus:not([disabled])) {
+  .nav :global(.btn.filled:focus:not([disabled])) {
     box-shadow: none;
     background-image: none;
   }
-  :global(.nav .btn.filled:hover:not([disabled])) {
+  .nav :global(.btn.filled:hover:not([disabled])) {
     box-shadow: none;
     background-image: none;
   }
 </style>
 
 <nav class="nav">
-  <Button round filled href={$url('/')}>
-    <HomeIcon size="32" />
-  </Button>
-  <Button round filled href={$url('/stats')}>
-    <BarChartIcon size="32" />
-  </Button>
-  <Button round filled href={$url('/settings')}>
-    <SlidersIcon size="32" />
+  {#each items as [href, Icon]}
+    <Button
+      round
+      filled
+      {href}
+      on:click={() => {
+        $url = href;
+      }}>
+      <div class:active={href === $url} class="icon-wrapper">
+        <Icon size="32" />
+      </div>
+    </Button>
+  {/each}
+  <!-- Floating Action Button -->
+  <Button
+    round
+    filled
+    href="/add"
+    on:click={() => {
+      $url = '/add';
+    }}>
+    <div class:active={'/add' === $url} class="icon-wrapper">
+      <PlusIcon size="32" />
+    </div>
   </Button>
 </nav>

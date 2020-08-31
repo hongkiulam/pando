@@ -1,5 +1,12 @@
-<script>
+<script lang="ts">
+  import { url } from "../store";
 
+  const prettyTitle = {
+    "/": "pando",
+    "/stats": "stats",
+    "/settings": "settings",
+    "/add": "add",
+  };
 </script>
 
 <style>
@@ -17,6 +24,6 @@
 
 <div class="topbar">
   <div />
-  <h1 class="title">pando</h1>
+  <h1 class="title">{prettyTitle[$url]}</h1>
   <img src="/logo.svg" alt="logo" />
 </div>
