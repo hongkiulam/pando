@@ -24,6 +24,7 @@
     background: var(--primary);
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
+    padding: 0 20px;
   }
   .active {
     color: var(--dark);
@@ -44,6 +45,20 @@
     box-shadow: none;
     background-image: none;
   }
+  /* floating action button */
+  .fab {
+    transform: translate(0, -20px);
+    width: 70px;
+    height: 70px;
+  }
+  .fab :global(.btn.filled),
+  .fab :global(.btn.filled:hover),
+  .fab :global(.btn.filled:focus) {
+    background: var(--secondary);
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+  }
 </style>
 
 <nav class="nav">
@@ -61,15 +76,16 @@
     </Button>
   {/each}
   <!-- Floating Action Button -->
-  <Button
-    round
-    filled
-    href="/add"
-    on:click={() => {
-      $url = '/add';
-    }}>
-    <div class:active={'/add' === $url} class="icon-wrapper">
-      <PlusIcon size="32" />
-    </div>
-  </Button>
+  <div class="fab">
+    <Button
+      filled
+      href="/add"
+      on:click={() => {
+        $url = '/add';
+      }}>
+      <div class="icon-wrapper">
+        <PlusIcon size="32" />
+      </div>
+    </Button>
+  </div>
 </nav>
