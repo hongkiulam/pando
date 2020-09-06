@@ -1,6 +1,6 @@
 ## Pando Finance
 
-#### Using Svelte, Typescript, Routify, sveltefire, Netlify, PWA
+#### Using Svelte, Typescript, Routify, Firebase, Netlify, PWA
 
 A personal finance app for tracking monthly expenses.
 

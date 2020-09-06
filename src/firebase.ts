@@ -15,5 +15,14 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-export { firebase, db };
+const firestore = firebase.firestore();
+import { readable } from "svelte/store";
+const db = readable({}, (set) => {
+  firestore
+    .collection("records")
+    .doc("me")
+    .onSnapshot((doc) => {
+      set(doc.data());
+    });
+});
+export { db, firestore };
