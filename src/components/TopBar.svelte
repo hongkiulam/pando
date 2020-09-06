@@ -20,10 +20,13 @@
     color: var(--primary);
     text-align: center;
   }
+  .logo {
+    height: 40px;
+  }
 </style>
 
 <div class="topbar">
   <div />
   <h1 class="title">{prettyTitle[$url]}</h1>
-  <img src="/logo.svg" alt="logo" />
+  <img class="logo" src="/assets/logo.svg" alt="logo" />
 </div>

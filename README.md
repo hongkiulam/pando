@@ -8,7 +8,7 @@ I already have an Excel document tracking my expenses, where I input my income a
 
 ### TODO
 
-- [] make pwa ready
+- [x] make pwa ready
 - [] fix typescript untyped modules
 - [x] isActive navigation
 

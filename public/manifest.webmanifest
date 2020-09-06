@@ -1,0 +1,20 @@
+{
+  "name": "Pando Finance",
+  "short_name": "Pando",
+  "description": "",
+  "icons": [
+    {
+      "src": "/assets/logo.svg"
+    },
+    {
+      "src": "/assets/logo.png",
+      "sizes": "145x145",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "theme_color": "#dc9509",
+  "background_color": "#f3f3f3",
+  "orientation": "portrait"
+}
