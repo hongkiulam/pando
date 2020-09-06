@@ -3,4 +3,7 @@
   $: console.log($db);
 </script>
 
-<div>Home</div>
+<div>
+  Home
+  <pre>{JSON.stringify($db, null, 2)}</pre>
+</div>

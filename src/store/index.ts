@@ -1,4 +1,4 @@
 import { writable } from "svelte/store";
+import type { URL } from "../types/url";
 
-type URL = "/" | "/stats" | "/settings" | "/add";
 export const url = writable<URL>(window.location.pathname as URL);
