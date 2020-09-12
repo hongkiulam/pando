@@ -17,12 +17,13 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
 import { readable } from "svelte/store";
-const db = readable({}, (set) => {
+import type { Record } from "./types/db";
+const db = readable<Record>(null, (set) => {
   firestore
     .collection("records")
     .doc("me")
     .onSnapshot((doc) => {
-      set(doc.data());
+      set(doc.data() as Record);
     });
 });
 export { db, firestore };

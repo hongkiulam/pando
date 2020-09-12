@@ -1,5 +1,11 @@
 <script lang="ts">
-
+  import Loading from "./Loading.svelte";
+  import { db } from "../firebase";
+  $: splitRatio = $db?.splitRatio;
 </script>
 
-<div>Split Ratio settings</div>
+{#if splitRatio !== undefined}
+  {splitRatio}:{100 - splitRatio}
+{:else}
+  <Loading full />
+{/if}
