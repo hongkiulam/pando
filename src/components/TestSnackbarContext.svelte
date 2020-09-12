@@ -1,7 +1,7 @@
 <script>
   import { getContext } from "svelte";
   import { snackbarContextKey } from "attractions/snackbar";
-  import Button from "attractions/button";
+  import { Button } from "attractions";
 
   const showSnackbar = getContext(snackbarContextKey);
 </script>

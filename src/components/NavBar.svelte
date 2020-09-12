@@ -1,6 +1,6 @@
 <script>
   import { url } from "../store";
-  import Button from "attractions/button";
+  import { Button } from "attractions";
   import {
     HomeIcon,
     SlidersIcon,
@@ -25,6 +25,7 @@
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     padding: 0 20px;
+    box-shadow: 0px -2px 4px 0px var(--medium);
   }
   .active {
     color: var(--dark);
