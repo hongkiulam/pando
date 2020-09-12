@@ -34,6 +34,10 @@ a {
   --dark: #555555;
   --success: #0c8d44;
   --danger: #a41111;
+  --paddingS: 8px;
+  --padding: 16px;
+  --paddingL: 24px;
+  --paddingXL: 32px;
 }
 h1 {
   font-size: 2.5rem;
