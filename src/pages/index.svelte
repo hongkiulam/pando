@@ -1,5 +1,4 @@
 <script>
-  import Loading from "../components/Loading.svelte";
   import { db } from "../firebase";
 </script>
 

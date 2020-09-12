@@ -12,11 +12,15 @@
 </script>
 
 <style>
-
+  .container {
+    padding: var(--padding);
+  }
 </style>
 
 <Tabs
   name="settings-tab"
   items={['Income', 'Bills', 'Split Ratio']}
   bind:value={selectedTab} />
-<svelte:component this={tabs[selectedTab]} />
+  <div class="container">
+    <svelte:component this={tabs[selectedTab]} />
+  </div>

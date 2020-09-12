@@ -10,8 +10,12 @@
 </script>
 
 <style>
-
+  .container {
+    padding: var(--padding);
+  }
 </style>
 
 <Tabs name="stats-tab" items={['Finance', 'Stocks']} bind:value={selectedTab} />
-<svelte:component this={tabs[selectedTab]} />
+<div class="container">
+  <svelte:component this={tabs[selectedTab]} />
+</div>
