@@ -1,9 +1,6 @@
 <script>
-  import { db, firestore } from "../firebase";
-  $: console.log($db);
+  import Loading from "../components/Loading.svelte";
+  import { db } from "../firebase";
 </script>
 
-<div>
-  Home
-  <pre>{JSON.stringify($db, null, 2)}</pre>
-</div>
+<pre>{JSON.stringify($db, null, 2)}</pre>

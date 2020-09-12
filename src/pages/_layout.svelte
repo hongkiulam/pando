@@ -1,7 +1,9 @@
 <script>
-  import { Button, SnackbarContainer } from "attractions";
+  import { SnackbarContainer } from "attractions";
   import NavBar from "../components/NavBar.svelte";
   import TopBar from "../components/TopBar.svelte";
+  import Loading from "../components/Loading.svelte";
+  import { db } from "../firebase";
 </script>
 
 <style>
@@ -25,7 +27,11 @@
   <div class="app">
     <TopBar />
     <div class="body">
-      <slot />
+      {#if $db}
+        <slot />
+      {:else}
+        <Loading full />
+      {/if}
     </div>
     <NavBar />
   </div>

@@ -13,5 +13,5 @@
 
 </style>
 
-<Tabs name="add-tab" items={['Finance', 'Stocks']} bind:value={selectedTab} />
+<Tabs name="stats-tab" items={['Finance', 'Stocks']} bind:value={selectedTab} />
 <svelte:component this={tabs[selectedTab]} />
