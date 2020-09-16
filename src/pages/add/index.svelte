@@ -2,6 +2,7 @@
   import Tabs from "../../components/Tabs.svelte";
   import AddFinance from "../../components/AddFinance.svelte";
   import AddStocks from "../../components/AddStocks.svelte";
+  import PageContainer from "../../components/PageContainer.svelte";
   let selectedTab = "Finance";
   const tabs = {
     Finance: AddFinance,
@@ -10,12 +11,15 @@
 </script>
 
 <style>
-  .container {
-    padding: var(--padding);
-  }
+
 </style>
 
 <Tabs name="add-tab" items={['Finance', 'Stocks']} bind:value={selectedTab} />
-<div class="container">
+<PageContainer
+  tabs={['Finance', 'Stocks']}
+  {selectedTab}
+  onTabChange={(nextTab) => {
+    selectedTab = nextTab;
+  }}>
   <svelte:component this={tabs[selectedTab]} />
-</div>
+</PageContainer>
