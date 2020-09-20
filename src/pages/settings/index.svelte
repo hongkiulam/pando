@@ -5,7 +5,8 @@
   import SplitRatioSettings from "../../components/SplitRatioSettings.svelte";
   import PageContainer from "../../components/PageContainer.svelte";
   let selectedTab = "Income";
-  const tabs = {
+  const tabs = ["Income", "Bills", "Split Ratio"];
+  const tabsToComponent = {
     Income: IncomeSettings,
     Bills: BillSettings,
     "Split Ratio": SplitRatioSettings,
@@ -16,15 +17,5 @@
 
 </style>
 
-<Tabs
-  name="settings-tab"
-  items={['Income', 'Bills', 'Split Ratio']}
-  bind:value={selectedTab} />
-<PageContainer
-  tabs={['Income', 'Bills', 'Split Ratio']}
-  {selectedTab}
-  onTabChange={(nextTab) => {
-    selectedTab = nextTab;
-  }}>
-  <svelte:component this={tabs[selectedTab]} />
-</PageContainer>
+<Tabs name="settings-tab" items={tabs} bind:value={selectedTab} />
+<PageContainer {tabs} {tabsToComponent} bind:selectedTab />

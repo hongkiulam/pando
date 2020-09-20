@@ -3,7 +3,7 @@
   import swipeTabChange from "../utils/swipeTabChange";
   export let tabs;
   export let selectedTab;
-  export let onTabChange = () => {};
+  export let tabsToComponent;
 </script>
 
 <style>
@@ -17,10 +17,12 @@
   class="container"
   use:swipe
   on:swipeleft={() => {
-    onTabChange(swipeTabChange(tabs, selectedTab, 1));
+    selectedTab = swipeTabChange(tabs, selectedTab, 1);
   }}
   on:swiperight={() => {
-    onTabChange(swipeTabChange(tabs, selectedTab, -1));
+    selectedTab = swipeTabChange(tabs, selectedTab, -1);
   }}>
-  <slot />
+  {#if selectedTab}
+    <svelte:component this={tabsToComponent[selectedTab]} />
+  {/if}
 </div>

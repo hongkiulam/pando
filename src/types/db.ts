@@ -4,16 +4,14 @@ export interface FirestoreTimeStamp {
   nanoseconds: number;
   toDate: () => Date;
 }
-export interface BillType {
+interface ExpenseType {
   default: number;
   name: string;
   frequency: Frequency;
+  id: number;
 }
-export interface IncomeType {
-  default: number;
-  name: string;
-  frequency: Frequency;
-}
+export interface BillType extends ExpenseType {}
+export interface IncomeType extends ExpenseType {}
 export interface StockType {
   name: string;
 }

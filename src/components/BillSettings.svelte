@@ -3,6 +3,6 @@
   $: billTypes = $db?.billTypes || [];
 </script>
 
-{#each billTypes as { name, default: defaultAmount, frequency }}
-  {name}{defaultAmount}{frequency}
+{#each billTypes as { name, default: defaultAmount, frequency,id }}
+  {name}{defaultAmount}{frequency}{id}
 {/each}

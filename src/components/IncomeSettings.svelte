@@ -3,6 +3,6 @@
   $: incomeTypes = $db?.incomeTypes || [];
 </script>
 
-{#each incomeTypes as { name, default: defaultAmount, frequency }}
-  {name}{defaultAmount}{frequency}
+{#each incomeTypes as { name, default: defaultAmount, frequency, id }}
+  {name}{defaultAmount}{frequency}{id}
 {/each}

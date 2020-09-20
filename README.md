@@ -11,6 +11,8 @@ I already have an Excel document tracking my expenses, where I input my income a
 - [x] make pwa ready
 - [] fix typescript untyped modules
 - [x] isActive navigation
+- [] actions for getting? and setting firestore
+- [x] bill type, income type, stock type all reference id instead
 
 _Note that you will need to have [Node.js](https://nodejs.org) installed._
 
