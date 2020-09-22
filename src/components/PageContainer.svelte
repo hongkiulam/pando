@@ -22,7 +22,5 @@
   on:swiperight={() => {
     selectedTab = swipeTabChange(tabs, selectedTab, -1);
   }}>
-  {#if selectedTab}
-    <svelte:component this={tabsToComponent[selectedTab]} />
-  {/if}
+  <svelte:component this={tabsToComponent[selectedTab]} />
 </div>

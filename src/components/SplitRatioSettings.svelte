@@ -1,7 +1,8 @@
 <script lang="ts">
   import Input from "../components/Input.svelte";
-  import Button from "attractions/button";
+  import SaveCancelButtonGroup from "../components/SaveCancelButtonGroup.svelte";
   import { db } from "../firebase";
+  import { splitRatio } from "../actions";
 
   let toSaving = $db.splitRatio;
   $: toSpending = 100 - toSaving;
@@ -29,5 +30,11 @@
   %
 </Input>
 {#if isDirty}
-  <Button outline>Save</Button>
+  <SaveCancelButtonGroup
+    on:cancel={() => {
+      toSaving = $db.splitRatio;
+    }}
+    on:save={() => {
+      !validationError && splitRatio.update(toSaving);
+    }} />
 {/if}
