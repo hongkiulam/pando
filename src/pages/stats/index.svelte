@@ -1,5 +1,6 @@
 <script>
-  import Tabs from "../../components/Tabs.svelte";
+  import Tab, { Label } from "@smui/tab";
+  import TabBar from "@smui/tab-bar";
   import FinanceStats from "../../components/FinanceStats.svelte";
   import StockStats from "../../components/StockStats.svelte";
   import PageContainer from "../../components/PageContainer.svelte";
@@ -15,6 +16,9 @@
 
 </style>
 
-<Tabs name="stats-tab" items={tabs} bind:value={selectedTab} />
+<TabBar {tabs} let:tab bind:active={selectedTab}>
+  <Tab {tab}>
+    <Label>{tab}</Label>
+  </Tab>
+</TabBar>
 <PageContainer {tabs} {tabsToComponent} bind:selectedTab />
-

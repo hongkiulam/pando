@@ -1,5 +1,6 @@
 <script>
-  import Tabs from "../../components/Tabs.svelte";
+  import Tab, { Label } from "@smui/tab";
+  import TabBar from "@smui/tab-bar";
   import IncomeSettings from "../../components/IncomeSettings.svelte";
   import BillSettings from "../../components/BillSettings.svelte";
   import SplitRatioSettings from "../../components/SplitRatioSettings.svelte";
@@ -17,5 +18,9 @@
 
 </style>
 
-<Tabs name="settings-tab" items={tabs} bind:value={selectedTab} />
+<TabBar {tabs} let:tab bind:active={selectedTab}>
+  <Tab {tab}>
+    <Label>{tab}</Label>
+  </Tab>
+</TabBar>
 <PageContainer {tabs} {tabsToComponent} bind:selectedTab />

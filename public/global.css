@@ -38,6 +38,7 @@ a {
   --padding: 16px;
   --paddingL: 24px;
   --paddingXL: 32px;
+  --barHeight: 70px;
   --vh: 100vh;
 }
 h1 {

@@ -1,17 +1,12 @@
 <script>
   import { url } from "../store";
-  import { Button } from "attractions";
-  import {
-    HomeIcon,
-    SlidersIcon,
-    BarChartIcon,
-    PlusIcon,
-  } from "svelte-feather-icons";
+  import IconButton, { Icon } from "@smui/icon-button";
+  import Fab from "@smui/fab";
 
   const items = [
-    ["/", HomeIcon],
-    ["/stats", BarChartIcon],
-    ["/settings", SlidersIcon],
+    ["/", "home"],
+    ["/stats", "bar_chart"],
+    ["/settings", "tune"],
   ];
 </script>
 
@@ -30,55 +25,40 @@
   .active {
     color: var(--dark);
   }
-  .icon-wrapper :global(svg) {
-    display: block;
-  }
-  /* override button styles */
-  .nav :global(.btn.filled) {
-    box-shadow: none;
-    background-image: none;
-  }
-  .nav :global(.btn.filled:focus:not([disabled])) {
-    box-shadow: none;
-    background-image: none;
-  }
-  .nav :global(.btn.filled:hover:not([disabled])) {
-    box-shadow: none;
-    background-image: none;
+  .inactive {
+    color: var(--light);
   }
   /* floating action button */
   .fab {
     transform: translate(0, -20px);
-    width: 70px;
-    height: 70px;
-  }
-  .fab :global(.btn.filled),
-  .fab :global(.btn.filled:hover),
-  .fab :global(.btn.filled:focus) {
-    background: var(--secondary);
-    height: 100%;
-    width: 100%;
-    justify-content: center;
   }
 </style>
 
 <nav class="nav">
-  {#each items as [href, Icon]}
-    <Button
-      round
-      filled
-      {href}
-      on:click={() => {
-        $url = href;
-      }}>
-      <div class:active={href === $url} class="icon-wrapper">
-        <Icon size="32" />
-      </div>
-    </Button>
+  {#each items as [href, icon]}
+    <div class:inactive={$url !== href} class:active={$url === href}>
+      <IconButton
+        {href}
+        on:click={() => {
+          $url = href;
+        }}>
+        <Icon class="material-icons">{icon}</Icon>
+      </IconButton>
+    </div>
   {/each}
   <!-- Floating Action Button -->
   <div class="fab">
-    <Button
+    <a href="/add">
+      <Fab
+        color="secondary"
+        href="/add"
+        on:click={() => {
+          $url = '/add';
+        }}>
+        <Icon class="material-icons">add</Icon>
+      </Fab>
+    </a>
+    <!-- <Button
       filled
       href="/add"
       on:click={() => {
@@ -87,6 +67,6 @@
       <div class="icon-wrapper">
         <PlusIcon size="32" />
       </div>
-    </Button>
+    </Button> -->
   </div>
 </nav>

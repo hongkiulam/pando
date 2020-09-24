@@ -9,7 +9,9 @@
 <style>
   .app {
     display: grid;
-    grid-template-rows: 80px calc(100% - 160px) 80px;
+    grid-template-rows: var(--barHeight) calc(100% - (var(--barHeight) * 2)) var(
+        --barHeight
+      );
     width: 100%;
     height: 100%;
   }

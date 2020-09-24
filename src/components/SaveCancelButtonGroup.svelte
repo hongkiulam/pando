@@ -1,7 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { Button } from "attractions";
-
+  import Button, { Label, Icon } from "@smui/button";
   const dispatch = createEventDispatcher();
 
   const onCancel = () => {
@@ -27,6 +26,12 @@
 </style>
 
 <div class="button_group">
-  <Button rectangle outline small on:click={onCancel}>Cancel</Button>
-  <Button rectangle filled small on:click={onSave}>Save</Button>
+  <Button variant="outline" on:click={onCancel}>
+    <Label>Cancel</Label>
+    <Icon class="material-icons">clear</Icon>
+  </Button>
+  <Button variant="unelevated" on:click={onSave}>
+    <Label>Save</Label>
+    <Icon class="material-icons">save</Icon>
+  </Button>
 </div>

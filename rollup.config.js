@@ -5,6 +5,7 @@ import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
+import postcss from "rollup-plugin-postcss";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -33,6 +34,26 @@ function serve() {
   };
 }
 
+// mainly for smui
+const postcssOptions = () => ({
+  extensions: [".scss", ".sass"],
+  extract: false,
+  minimize: true,
+  use: [
+    [
+      "sass",
+      {
+        includePaths: [
+          "./src/smui",
+          "./node_modules",
+          "./smui",
+          //'./static/sass'
+        ],
+      },
+    ],
+  ],
+});
+
 export default {
   input: "src/main.ts",
   output: {
@@ -56,6 +77,7 @@ export default {
         },
       }),
     }),
+    postcss(postcssOptions()),
 
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
