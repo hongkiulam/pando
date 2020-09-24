@@ -1,7 +1,7 @@
 import { firestore } from "../firebase";
 import showSnackbar from "../utils/showSnackbar";
 export const update = (splitRatio: number) => {
-  setTimeout(() => {
+  const errorTimeout = setTimeout(() => {
     showSnackbar({ text: "Error updating Split Ratio within 3s" });
   }, 3000);
 
@@ -11,5 +11,6 @@ export const update = (splitRatio: number) => {
     })
     .then(() => {
       showSnackbar({ text: "Successfully updated Split Ratio" });
+      clearTimeout(errorTimeout);
     });
 };

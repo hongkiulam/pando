@@ -9,7 +9,7 @@ html,
 body {
   position: relative;
   width: 100vw;
-  height: calc(var(--vh, 1vh) * 100);
+  height: var(--vh);
   font-size: 16px;
   overflow: hidden;
 }
@@ -38,6 +38,7 @@ a {
   --padding: 16px;
   --paddingL: 24px;
   --paddingXL: 32px;
+  --vh: 100vh;
 }
 h1 {
   font-size: 2.5rem;
