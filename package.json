@@ -18,7 +18,6 @@
     "@types/hammerjs": "^2.0.36",
     "firebase": "^7.19.1",
     "hammerjs": "^2.0.8",
-    "node-sass": "^4.14.1",
     "postcss": "^7.0.32",
     "rollup": "^2.3.4",
     "rollup-plugin-livereload": "^1.0.0",
@@ -33,6 +32,7 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
+    "sass": "^1.26.11",
     "sirv-cli": "^1.0.0"
   }
 }

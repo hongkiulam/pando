@@ -12,38 +12,28 @@
   $: isDirty = $db.splitRatio !== toSaving;
 </script>
 
-<style>
-  .container {
-    display: grid;
-    grid-auto-flow: row;
-    gap: var(--padding);
-  }
-</style>
-
-<div class="container">
-  <div>
-    <TextField
-      type="number"
-      label="To Saving"
-      bind:value={toSaving}
-      style="width:100%" />
-    <HelperText>Value must be between 1 and 99</HelperText>
-  </div>
-
+<div>
   <TextField
     type="number"
-    disabled
-    label="To Spending"
-    bind:value={toSpending}
+    label="To Saving"
+    bind:value={toSaving}
     style="width:100%" />
-
-  {#if isDirty}
-    <SaveCancelButtonGroup
-      on:cancel={() => {
-        toSaving = $db.splitRatio;
-      }}
-      on:save={() => {
-        !validationError && splitRatio.update(toSaving);
-      }} />
-  {/if}
+  <HelperText>Value must be between 1 and 99</HelperText>
 </div>
+
+<TextField
+  type="number"
+  disabled
+  label="To Spending"
+  bind:value={toSpending}
+  style="width:100%" />
+
+{#if isDirty}
+  <SaveCancelButtonGroup
+    on:cancel={() => {
+      toSaving = $db.splitRatio;
+    }}
+    on:save={() => {
+      !validationError && splitRatio.update(toSaving);
+    }} />
+{/if}

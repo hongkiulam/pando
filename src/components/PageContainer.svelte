@@ -11,6 +11,11 @@
     padding: var(--padding);
     flex: 1;
   }
+  .component_container {
+    display: grid;
+    grid-auto-flow: row;
+    gap: var(--padding);
+  }
 </style>
 
 <div
@@ -22,5 +27,7 @@
   on:swiperight={() => {
     selectedTab = swipeTabChange(tabs, selectedTab, -1);
   }}>
-  <svelte:component this={tabsToComponent[selectedTab]} />
+  <div class="component_container">
+    <svelte:component this={tabsToComponent[selectedTab]} />
+  </div>
 </div>
