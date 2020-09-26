@@ -1,16 +1,30 @@
 <script lang="ts">
-  import { Loading } from "attractions";
   export let full: boolean;
 </script>
 
 <style>
-  :global(.pando_loading) {
+  .container {
     padding: var(--paddingXL);
+    display: grid;
+    place-items: center;
   }
-  :global(.pando_loading.full) {
+  .container img {
+    animation: pulse 0.3s ease infinite alternate;
+  }
+  .full {
     height: 100%;
     width: 100%;
   }
+  @keyframes pulse {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.3;
+    }
+  }
 </style>
 
-<Loading class="pando_loading {full && 'full'}" />
+<div class="container" class:full>
+  <img src="/assets/logo.svg" alt="..." width="20px" height="20px" />
+</div>
