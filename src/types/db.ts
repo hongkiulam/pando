@@ -8,7 +8,7 @@ interface ExpenseType {
   default: number;
   name: string;
   frequency: Frequency;
-  id: number;
+  id?: number;
 }
 export interface BillType extends ExpenseType {}
 export interface IncomeType extends ExpenseType {}
@@ -19,7 +19,7 @@ export interface Stock {
   accumulated: number;
   name: string;
   amount: number;
-  id: number;
+  id?: number;
   date: FirestoreTimeStamp;
 }
 export interface Finance {
@@ -31,7 +31,7 @@ export interface Finance {
     name: string;
     amount: number;
   }[];
-  id: number;
+  id?: number;
   accSaved: number;
   accSpending: number;
   remainingSaved: number;

@@ -22,20 +22,20 @@
   }
 </style>
 
-{#each incomeTypes as { name, default: defaultAmount, frequency }, index}
-  <Slat {index}>
+{#each incomeTypes as iT}
+  <Slat>
     <div class="main_display">
       <div class="column">
         <small>Type</small>
-        <h2 class="property">{name}</h2>
+        <h2 class="property">{iT.name}</h2>
       </div>
       <div class="column">
         <small>Frequency</small>
-        <h2 class="property">{frequency}</h2>
+        <h2 class="property">{iT.frequency}</h2>
       </div>
       <div class="column">
         <small>Default</small>
-        <h2 class="property">£{defaultAmount}</h2>
+        <h2 class="property">£{iT.default}</h2>
       </div>
     </div>
   </Slat>
