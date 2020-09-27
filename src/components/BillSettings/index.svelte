@@ -5,7 +5,7 @@
   import Button, { Icon } from "@smui/button";
   import Slat from "../Slat.svelte";
   import EditBillType from "./EditBillType.svelte";
-  $: billTypes = $db?.billTypes || [];
+  $: billTypes = $db ? $db.billTypes : [];
 
   let addDialog;
 </script>

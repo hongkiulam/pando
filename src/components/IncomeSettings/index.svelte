@@ -5,7 +5,7 @@
   import Slat from "../Slat.svelte";
   import EditIncomeType from "./EditIncomeType.svelte";
   import { incomeSettings } from "../../actions";
-  $: incomeTypes = $db?.incomeTypes || [];
+  $: incomeTypes = $db ? $db.incomeTypes : [];
 
   let addDialog;
 </script>
