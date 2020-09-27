@@ -1,9 +1,13 @@
-<script lang="ts">
-  import { billSettings } from "../actions";
-
-  import { db } from "../firebase";
-  import Slat from "./Slat.svelte";
+<script>
+  import { billSettings } from "../../actions";
+  import { db } from "../../firebase";
+  import Dialog from "@smui/dialog";
+  import Button, { Icon } from "@smui/button";
+  import Slat from "../Slat.svelte";
+  import EditBillType from "./EditBillType.svelte";
   $: billTypes = $db?.billTypes || [];
+
+  let addDialog;
 </script>
 
 <style>
@@ -22,10 +26,30 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .add_item {
+    display: flex;
+    justify-content: flex-end;
+  }
 </style>
 
+<div class="add_item">
+  <Button
+    color="secondary"
+    on:click={() => {
+      addDialog.open();
+    }}>
+    Add Item
+    <Icon class="material-icons">add</Icon>
+  </Button>
+  <Dialog bind:this={addDialog}>
+    <EditBillType create />
+  </Dialog>
+</div>
 {#each billTypes as bT}
-  <Slat onEdit={() => {}}>
+  <Slat
+    onDelete={() => {
+      billSettings.remove(bT);
+    }}>
     <div class="main_display">
       <div class="column">
         <small>Type</small>
@@ -39,6 +63,9 @@
         <small>Default</small>
         <h2 class="property">£{bT.default}</h2>
       </div>
+    </div>
+    <div slot="edit-dialog">
+      <EditBillType initialBillType={bT} />
     </div>
   </Slat>
 {/each}

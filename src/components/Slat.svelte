@@ -2,17 +2,21 @@
   import { onDestroy } from "svelte";
   import Dialog, { Title, Content, Actions } from "@smui/dialog";
   import Button, { Label } from "@smui/button";
-  import Ripple from "@smui/ripple";
   import { fly } from "svelte/transition";
 
   export let hideDelete = false;
-  export let onEdit = () => {};
   export let onDelete = () => {};
 
   let open = false;
   let showActions = false;
   let slatEl;
   let deleteDialog;
+  let editDialog;
+
+  const slatAnimationOptions = {
+    x: -20,
+    duration: 5000, // we will override this duration, setting to to 10 seconds so that svelte wont remove the animation too soon
+  };
 
   const handleClickOuside = (e) => {
     if (!slatEl || (!open && !showActions)) return;
@@ -33,7 +37,8 @@
   @mixin staggerAnimation {
     @for $i from 1 through 10 {
       &:nth-of-type(#{$i}) {
-        animation-delay: calc(#{$i} * 100ms) !important;
+        animation-delay: calc(#{$i - 2} * 100ms) !important;
+        animation-duration: 400ms !important;
       }
     }
   }
@@ -72,7 +77,7 @@
   }
 </style>
 
-<div class="slat" bind:this={slatEl} in:fly={{ x: -20 }}>
+<div class="slat" bind:this={slatEl} in:fly={slatAnimationOptions}>
   <div
     class="slat_main"
     on:click={() => {
@@ -84,7 +89,7 @@
         <i
           class="material-icons"
           on:click|stopPropagation={() => {
-            onEdit();
+            editDialog.open();
             showActions = false;
           }}>
           edit
@@ -122,24 +127,33 @@
   {/if}
 
   <Dialog
-    bind:this={deleteDialog}
-    aria-labelledby="delete-title"
-    aria-describedby="delete-content">
-    <Title id="delete-title">Delete item?</Title>
-    <Content id="delete-content">
-      Are you sure you want to delete this item?
-    </Content>
-    <Actions>
-      <Button>
-        <Label>No</Label>
-      </Button>
-      <Button
-        on:click={onDelete}
-        variant="unelevated"
-        class="delete_dialog_button">
-        <Label>Yes</Label>
-      </Button>
-    </Actions>
+    bind:this={editDialog}
+    aria-labelledby="edit-title"
+    aria-describedby="edit-content">
+    <Title id="edit-title">Edit item</Title>
+    <slot name="edit-dialog" />
   </Dialog>
+  {#if !hideDelete}
+    <Dialog
+      bind:this={deleteDialog}
+      aria-labelledby="delete-title"
+      aria-describedby="delete-content">
+      <Title id="delete-title">Delete item?</Title>
+      <Content id="delete-content">
+        Are you sure you want to delete this item?
+      </Content>
+      <Actions>
+        <Button>
+          <Label>No</Label>
+        </Button>
+        <Button
+          on:click={onDelete}
+          variant="unelevated"
+          class="delete_dialog_button">
+          <Label>Yes</Label>
+        </Button>
+      </Actions>
+    </Dialog>
+  {/if}
 
 </div>

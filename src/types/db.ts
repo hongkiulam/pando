@@ -14,6 +14,7 @@ export interface BillType extends ExpenseType {}
 export interface IncomeType extends ExpenseType {}
 export interface StockType {
   name: string;
+  id?: number;
 }
 export interface Stock {
   accumulated: number;
