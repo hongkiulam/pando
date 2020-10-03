@@ -1,23 +1,38 @@
-<script lang="ts">
+<script>
   import { Content, Actions } from "@smui/dialog";
   import TextField from "@smui/textfield";
   import SaveCancelButtonGroup from "../SaveCancelButtonGroup.svelte";
   import FrequencySelect from "../FrequencySelect.svelte";
 
-  import type { BillType } from "../../types/db";
+  import { DateTime } from "luxon";
+  // import type { BillType } from "../../types/db";
   import { billSettings } from "../../actions";
+  import { isoToTimestamp, timeStampToISO } from "../../utils/date";
 
-  export let create: boolean = false;
-  export let initialBillType: BillType = {
+  export let create = false;
+  export let initialBillType = {
     name: "",
     default: 0,
     frequency: "MONTHLY",
+    startDate: undefined,
   };
-  let modified: BillType = {
+
+  let modified = {
     ...initialBillType,
   };
+
+  $: if (modified.frequency === "ONEOFF") {
+    delete modified.startDate;
+  } else {
+    modified.startDate = modified.startDate || initialBillType.startDate;
+  }
+
   let isValid = false;
-  $: isValid = !!modified.name && !!modified.frequency && !!modified.default;
+  $: isValid =
+    !!modified.name &&
+    !!modified.frequency &&
+    !!modified.default &&
+    (modified.frequency === "ONEOFF" || !!modified.startDate);
 </script>
 
 <Content id="edit-content">
@@ -31,6 +46,16 @@
     label="Default Amount"
     bind:value={modified.default}
     style="width:100%" />
+  {#if modified.frequency !== 'ONEOFF'}
+    <TextField
+      type="date"
+      label="Start Date"
+      value={timeStampToISO(modified.startDate)}
+      on:change={(e) => {
+        modified.startDate = isoToTimestamp(e.target.value);
+      }}
+      style="width:100%" />
+  {/if}
 </Content>
 <Actions>
   <SaveCancelButtonGroup

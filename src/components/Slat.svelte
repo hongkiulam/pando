@@ -38,7 +38,6 @@
     @for $i from 1 through 10 {
       &:nth-of-type(#{$i}) {
         animation-delay: calc(#{$i - 2} * 100ms) !important;
-        animation-duration: 400ms !important;
       }
     }
   }
@@ -48,6 +47,7 @@
     padding: var(--padding);
     width: 100%;
     cursor: pointer;
+    animation-duration: 400ms !important;
     @include staggerAnimation();
   }
   .slat_main {

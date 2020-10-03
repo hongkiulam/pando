@@ -5,6 +5,8 @@
   import Slat from "../Slat.svelte";
   import EditIncomeType from "./EditIncomeType.svelte";
   import { incomeSettings } from "../../actions";
+  import { getRecurString } from "../../utils/date";
+
   $: incomeTypes = $db ? $db.incomeTypes : [];
 
   let addDialog;
@@ -63,6 +65,9 @@
         <small>Default</small>
         <h2 class="property">£{iT.default}</h2>
       </div>
+    </div>
+    <div slot="open">
+      {getRecurString(iT.startDate && iT.startDate.toDate(), iT.frequency)}
     </div>
     <div slot="edit-dialog">
       <EditIncomeType initialIncomeType={iT} />

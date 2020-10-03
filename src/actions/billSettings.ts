@@ -1,4 +1,4 @@
-import { firestore, db } from "../firebase";
+import { dbRef, db } from "../firebase";
 import type { BillType } from "../types/db";
 import { createBillTypeId } from "../utils/idGenerator";
 import { pushToast } from "./toast";
@@ -18,7 +18,7 @@ export const update = (billSetting: BillType) => {
     (bT) => bT.id === billSetting.id
   );
   newBillTypes.splice(indexToUpdate, 1, billSetting);
-  firestore
+  dbRef
     .update({
       billTypes: newBillTypes,
     })
@@ -35,7 +35,7 @@ export const remove = (billSetting: BillType) => {
   let newBillTypes: BillType[] = [...billTypes].filter(
     (bT) => bT.id !== billSetting.id
   );
-  firestore
+  dbRef
     .update({
       billTypes: newBillTypes,
     })
@@ -51,7 +51,7 @@ export const add = (billSetting: BillType) => {
 
   const billSettingWithId = { ...billSetting, id: createBillTypeId() };
   let newBillTypes = [...billTypes, billSettingWithId];
-  firestore
+  dbRef
     .update({
       billTypes: newBillTypes,
     })

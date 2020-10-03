@@ -5,6 +5,7 @@
   import Button, { Icon } from "@smui/button";
   import Slat from "../Slat.svelte";
   import EditBillType from "./EditBillType.svelte";
+  import { getRecurString } from "../../utils/date";
   $: billTypes = $db ? $db.billTypes : [];
 
   let addDialog;
@@ -63,6 +64,9 @@
         <small>Default</small>
         <h2 class="property">£{bT.default}</h2>
       </div>
+    </div>
+    <div slot="open">
+      {getRecurString(bT.startDate && bT.startDate.toDate(), bT.frequency)}
     </div>
     <div slot="edit-dialog">
       <EditBillType initialBillType={bT} />

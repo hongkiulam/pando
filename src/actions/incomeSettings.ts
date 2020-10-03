@@ -1,4 +1,4 @@
-import { firestore, db } from "../firebase";
+import { dbRef, db } from "../firebase";
 import type { IncomeType } from "../types/db";
 import { createIncomeTypeId } from "../utils/idGenerator";
 import { pushToast } from "./toast";
@@ -18,7 +18,7 @@ export const update = (incomeSetting: IncomeType) => {
     (iT) => iT.id === incomeSetting.id
   );
   newIncomeTypes.splice(indexToUpdate, 1, incomeSetting);
-  firestore
+  dbRef
     .update({
       incomeTypes: newIncomeTypes,
     })
@@ -35,7 +35,7 @@ export const remove = (incomeSetting: IncomeType) => {
   let newIncomeTypes: IncomeType[] = [...incomeTypes].filter(
     (iT) => iT.id !== incomeSetting.id
   );
-  firestore
+  dbRef
     .update({
       incomeTypes: newIncomeTypes,
     })
@@ -51,7 +51,7 @@ export const add = (incomeSetting: IncomeType) => {
 
   const incomeSettingWithId = { ...incomeSetting, id: createIncomeTypeId() };
   let newIncomeTypes = [...incomeTypes, incomeSettingWithId];
-  firestore
+  dbRef
     .update({
       incomeTypes: newIncomeTypes,
     })
