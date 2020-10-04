@@ -39,7 +39,7 @@
     on:click={() => {
       addDialog.open();
     }}>
-    Add Item
+    Add Bill Type
     <Icon class="material-icons">add</Icon>
   </Button>
   <Dialog bind:this={addDialog}>

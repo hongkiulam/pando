@@ -3,11 +3,10 @@
   import Dialog from "@smui/dialog";
   import Button, { Icon } from "@smui/button";
   import Slat from "../Slat.svelte";
-  import EditIncomeType from "./EditIncomeType.svelte";
-  import { incomeSettings } from "../../actions";
-  import { getRecurString } from "../../utils/date";
+  import EditStockType from "./EditStockType.svelte";
+  import { stockSettings } from "../../actions";
 
-  $: incomeTypes = $db ? $db.incomeTypes : [];
+  $: stockTypes = $db ? $db.stockTypes : [];
 
   let addDialog;
 </script>
@@ -15,7 +14,7 @@
 <style>
   .main_display {
     display: grid;
-    grid-template-columns: minmax(100px, 1fr) 1fr 1fr;
+    grid-template-columns: minmax(100px, 1fr) 1fr;
     gap: var(--paddingS);
   }
   .column {
@@ -40,37 +39,30 @@
     on:click={() => {
       addDialog.open();
     }}>
-    Add Income Type
+    Add Stock Type
     <Icon class="material-icons">add</Icon>
   </Button>
   <Dialog bind:this={addDialog}>
-    <EditIncomeType create />
+    <EditStockType create />
   </Dialog>
 </div>
-{#each incomeTypes as iT}
+{#each stockTypes as sT}
   <Slat
     onDelete={() => {
-      incomeSettings.remove(iT);
+      stockSettings.remove(sT);
     }}>
     <div class="main_display">
       <div class="column">
         <small>Type</small>
-        <h2 class="property">{iT.name}</h2>
-      </div>
-      <div class="column">
-        <small>Frequency</small>
-        <h2 class="property">{iT.frequency}</h2>
+        <h2 class="property">{sT.name}</h2>
       </div>
       <div class="column">
         <small>Default</small>
-        <h2 class="property">£{iT.default}</h2>
+        <h2 class="property">£{sT.default}</h2>
       </div>
     </div>
-    <div slot="open">
-      {getRecurString(iT.startDate && iT.startDate.toDate(), iT.frequency)}
-    </div>
     <div slot="edit-dialog">
-      <EditIncomeType initialIncomeType={iT} />
+      <EditStockType initialStockType={sT} />
     </div>
   </Slat>
 {/each}
