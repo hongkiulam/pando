@@ -1,6 +1,8 @@
 <script>
   import FinanceInput from "../../components/FinanceInput.svelte";
   import { finance } from "../../actions";
+  import {url}from '../../store';
+  $url = '/add';
 </script>
 
 <style>

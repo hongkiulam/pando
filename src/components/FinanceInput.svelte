@@ -3,7 +3,6 @@
   import Button, { Icon, Label } from "@smui/button";
   import ExpenseTypeInput from "./ExpenseTypeInput.svelte";
   import { db } from "../firebase";
-  import {url} from '../store'
   import {
     dateToTimestamp,
     isoToTimestamp,
@@ -138,7 +137,6 @@
     href='/stats'
     on:click={() => {
       modified = { ...modified, saved, spending, accSaved, accSpending };
-      $url = '/stats';
       onFinish(modified);
     }}>
     <Label>Finish</Label>

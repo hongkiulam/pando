@@ -10,6 +10,8 @@
     Finance: FinanceStats,
     Stocks: StockStats,
   };
+  import { url } from "../../store";
+  $url = "/stats";
 </script>
 
 <style>

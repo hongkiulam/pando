@@ -37,11 +37,7 @@
 <nav class="nav">
   {#each items as [href, icon]}
     <div class:inactive={$url !== href} class:active={$url === href}>
-      <IconButton
-        {href}
-        on:click={() => {
-          $url = href;
-        }}>
+      <IconButton {href}>
         <Icon class="material-icons">{icon}</Icon>
       </IconButton>
     </div>
@@ -49,24 +45,9 @@
   <!-- Floating Action Button -->
   <div class="fab">
     <a href="/add">
-      <Fab
-        color="secondary"
-        href="/add"
-        on:click={() => {
-          $url = '/add';
-        }}>
+      <Fab color="secondary" href="/add">
         <Icon class="material-icons">add</Icon>
       </Fab>
     </a>
-    <!-- <Button
-      filled
-      href="/add"
-      on:click={() => {
-        $url = '/add';
-      }}>
-      <div class="icon-wrapper">
-        <PlusIcon size="32" />
-      </div>
-    </Button> -->
   </div>
 </nav>

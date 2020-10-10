@@ -1,1 +1,1 @@
-export type URL = "/" | "/stats" | "/settings" | "/add";
+export type URL = "/" | "/stats" | "/settings" | "/add" | '/edit';

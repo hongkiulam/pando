@@ -14,6 +14,8 @@
     Stocks: StockSettings,
     "Split Ratio": SplitRatioSettings,
   };
+  import { url } from "../../store";
+  $url = "/settings";
 </script>
 
 <style>
