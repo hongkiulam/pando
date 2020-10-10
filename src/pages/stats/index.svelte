@@ -1,7 +1,7 @@
 <script>
   import Tab, { Label } from "@smui/tab";
   import TabBar from "@smui/tab-bar";
-  import FinanceStats from "../../components/FinanceStats.svelte";
+  import FinanceStats from "../../components/FinanceStats/index.svelte";
   import StockStats from "../../components/StockStats.svelte";
   import PageContainer from "../../components/PageContainer.svelte";
   let selectedTab = "Finance";

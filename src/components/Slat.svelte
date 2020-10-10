@@ -6,6 +6,7 @@
 
   export let hideDelete = false;
   export let onDelete = () => {};
+  export let editOnClick = undefined;
 
   let open = false;
   let showActions = false;
@@ -89,6 +90,9 @@
         <i
           class="material-icons"
           on:click|stopPropagation={() => {
+            if (editOnClick) {
+              return editOnClick();
+            }
             editDialog.open();
             showActions = false;
           }}>

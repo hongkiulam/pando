@@ -11,8 +11,13 @@ I already have an Excel document tracking my expenses, where I input my income a
 - [x] make pwa ready
 - [] fix typescript untyped modules
 - [x] isActive navigation
-- [] actions for getting? and setting firestore
+- [x] actions for getting? and setting firestore
 - [x] bill type, income type, stock type all reference id instead
+- [] should have a dynamic route for editing finance and stock data? edit/:id
+- [] ~~stock addition and editing can be done in a modal~~
+- [x] add stock setting tab
+- [x] when changing expense type in dropdown, update amount to default amount
+- [x] finances dont update when navigated to from add finance
 
 _Note that you will need to have [Node.js](https://nodejs.org) installed._
 

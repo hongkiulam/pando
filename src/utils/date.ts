@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 
 import type { FirestoreTimeStamp, Frequency } from "../types/db";
 
-const monthNames = [
+export const monthNames = [
   "January",
   "February",
   "March",
@@ -31,6 +31,17 @@ const dayWithSuffix = (dayOfMonth: number) => {
   return `${dayOfMonth}${suffix[unit] || "th"}`;
 };
 
+export const getShortMonth = (date: Date | FirestoreTimeStamp) => {
+  let d: Date;
+  if ((date as FirestoreTimeStamp).toDate) {
+    d = (date as FirestoreTimeStamp).toDate();
+  } else {
+    d = date as Date;
+  }
+  const month = d.getMonth();
+  const shortMonth = monthNames[month].slice(0, 3).toUpperCase();
+  return shortMonth;
+};
 export const getRecurString = (
   date: Date | FirestoreTimeStamp,
   frequency: Frequency

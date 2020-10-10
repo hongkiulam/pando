@@ -21,7 +21,7 @@ export interface StockType {
 }
 export interface Stock {
   accumulated: number;
-  name: string;
+  stockTypeId: number;
   amount: number;
   id?: number;
   date: FirestoreTimeStamp;
@@ -29,10 +29,10 @@ export interface Stock {
 export interface Finance {
   bills: {
     amount: number;
-    name: string;
+    billTypeId: number;
   }[];
   income: {
-    name: string;
+    incomeTypeId: number;
     amount: number;
   }[];
   id?: number;
