@@ -64,13 +64,13 @@
     <div slot="open" class="slat_detail">
       {#each f.income as { incomeTypeId, amount }}
         <div class="detail_row">
-          <small>{incomeTypes.find((x) => x.id === incomeTypeId)?.name}</small>
+          <small>{incomeTypes.find((x) => x.id === incomeTypeId).name}</small>
           <span>£{amount}</span>
         </div>
       {/each}
       {#each f.bills as { billTypeId, amount }}
         <div class="detail_row">
-          <small>{billTypes.find((x) => x.id === billTypeId)?.name}</small>
+          <small>{billTypes.find((x) => x.id === billTypeId).name}</small>
           <span>(£{amount})</span>
         </div>
       {/each}

@@ -7,10 +7,9 @@
   import { db } from "../../firebase";
   $url = "/edit";
   $: financeId = $params.id;
+  $: finances = $db ? $db.finance : [];
   let initialFinance;
-  $: initialFinance = ($db.finance || []).find(
-    (f) => f.id === Number(financeId)
-  );
+  $: initialFinance = finances.find((f) => f.id === Number(financeId));
 </script>
 
 <style>
