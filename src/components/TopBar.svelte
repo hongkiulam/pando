@@ -6,7 +6,7 @@
     "/stats": "stats",
     "/settings": "settings",
     "/add": "add",
-    '/edit': 'edit'
+    "/edit": "edit",
   };
 </script>
 

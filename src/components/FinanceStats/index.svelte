@@ -1,6 +1,7 @@
 <script lang="ts">
   import Slat from "../Slat.svelte";
   import { db } from "../../firebase";
+  import { goto } from "@sveltech/routify";
   import { getShortMonth } from "../../utils/date";
 
   $: finances = $db ? $db.finance : [];
@@ -45,7 +46,7 @@
   <Slat
     hideDelete
     editOnClick={() => {
-      console.log(f.id);
+      $goto('/edit/' + f.id);
     }}>
     <div class="slat_content">
       <h1>{getShortMonth(f.date)}</h1>

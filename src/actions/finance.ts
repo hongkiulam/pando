@@ -10,7 +10,7 @@ const u = db.subscribe((d) => {
 
 export const update = (f: Finance) => {
   const errorTimeout = setTimeout(() => {
-    pushToast("Error updating Finance entries within 3s");
+    pushToast("Error updating Finance entry within 3s");
   }, 3000);
 
   let newFinance = [...finance];
@@ -21,7 +21,7 @@ export const update = (f: Finance) => {
       finance: newFinance,
     })
     .then(() => {
-      pushToast("Successfully updated Finance entries");
+      pushToast("Successfully updated Finance entry");
       clearTimeout(errorTimeout);
     });
 };
