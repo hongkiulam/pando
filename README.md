@@ -4,8 +4,6 @@
 
 A personal finance app for tracking monthly expenses.
 
-I already have an Excel document tracking my expenses, where I input my income and bills, and it returns to me the amount I should save based on my financial goals. So why not make it an app ¯\_(ツ)\_/¯.
-
 ### TODO
 
 - [x] make pwa ready
@@ -18,6 +16,7 @@ I already have an Excel document tracking my expenses, where I input my income a
 - [x] add stock setting tab
 - [x] when changing expense type in dropdown, update amount to default amount
 - [x] finances dont update when navigated to from add finance
+- [] update bills text to say bills for next month etc...
 
 _Note that you will need to have [Node.js](https://nodejs.org) installed._
 

@@ -3,10 +3,15 @@
   import { db } from "../../firebase";
   import { goto } from "@sveltech/routify";
   import { getShortMonth } from "../../utils/date";
+  import { DateTime } from "luxon";
 
   $: finances = $db ? $db.finance : [];
   $: incomeTypes = $db ? $db.incomeTypes : [];
   $: billTypes = $db ? $db.billTypes : [];
+
+  const getShortYear = (date: Date) => {
+    return DateTime.fromJSDate(date).toFormat("yyyy");
+  };
 </script>
 
 <style lang="scss">
@@ -49,7 +54,10 @@
       $goto('/edit/' + f.id);
     }}>
     <div class="slat_content">
-      <h1>{getShortMonth(f.date)}</h1>
+      <h1>
+        {getShortMonth(f.date)}
+        <small>{getShortYear(f.date.toDate())}</small>
+      </h1>
       <div class="slat_header_info">
         <div class="row">
           <small>To spend</small>

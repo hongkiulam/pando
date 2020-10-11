@@ -20,7 +20,6 @@ export interface StockType {
   id?: number;
 }
 export interface Stock {
-  accumulated: number;
   stockTypeId: number;
   amount: number;
   id?: number;

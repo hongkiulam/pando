@@ -44,6 +44,7 @@
   }
   .slat {
     background: var(--primary-light);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     padding: var(--padding);
     width: 100%;
@@ -78,7 +79,7 @@
   }
 </style>
 
-<div class="slat" bind:this={slatEl} in:fly={slatAnimationOptions}>
+<div class="slat" class:open bind:this={slatEl} in:fly={slatAnimationOptions}>
   <div
     class="slat_main"
     on:click={() => {

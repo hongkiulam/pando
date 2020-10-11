@@ -1,6 +1,6 @@
 import { dbRef, db } from "../firebase";
-import type { BillType, Finance } from "../types/db";
-import { createBillTypeId, createFinanceId } from "../utils/idGenerator";
+import type { Finance } from "../types/db";
+import { createFinanceId } from "../utils/idGenerator";
 import { pushToast } from "./toast";
 
 let finance: Finance[];
