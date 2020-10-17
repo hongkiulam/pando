@@ -31,13 +31,24 @@ const dayWithSuffix = (dayOfMonth: number) => {
   return `${dayOfMonth}${suffix[unit] || "th"}`;
 };
 
-export const getShortMonth = (date: Date | FirestoreTimeStamp) => {
+const parseDate = (date: Date | FirestoreTimeStamp) => {
   let d: Date;
   if ((date as FirestoreTimeStamp).toDate) {
     d = (date as FirestoreTimeStamp).toDate();
   } else {
     d = date as Date;
   }
+  return d;
+};
+
+export const getLongMonth = (date: Date | FirestoreTimeStamp) => {
+  const d = parseDate(date);
+  const month = d.getMonth();
+  return monthNames[month];
+};
+
+export const getShortMonth = (date: Date | FirestoreTimeStamp) => {
+  const d = parseDate(date);
   const month = d.getMonth();
   const shortMonth = monthNames[month].slice(0, 3).toUpperCase();
   return shortMonth;
@@ -48,12 +59,7 @@ export const getRecurString = (
 ): string => {
   if (frequency === "ONEOFF") return "Does not repeat";
   if (!date) return "Start date not provided!";
-  let d: Date;
-  if ((date as FirestoreTimeStamp).toDate) {
-    d = (date as FirestoreTimeStamp).toDate();
-  } else {
-    d = date as Date;
-  }
+  const d = parseDate(date);
   const dayOfMonth = d.getDate();
   const month = monthNames[d.getMonth()];
   switch (frequency) {

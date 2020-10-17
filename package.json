@@ -15,6 +15,7 @@
     "@rollup/plugin-typescript": "^4.0.0",
     "@sveltech/routify": "^1.9.9",
     "@tsconfig/svelte": "^1.0.0",
+    "@types/chart.js": "^2.9.25",
     "@types/hammerjs": "^2.0.36",
     "@types/luxon": "^1.25.0",
     "firebase": "^7.19.1",
@@ -34,6 +35,7 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
+    "chart.js": "^2.9.3",
     "sass": "^1.26.11",
     "sirv-cli": "^1.0.0"
   }
