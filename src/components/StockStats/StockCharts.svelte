@@ -7,19 +7,20 @@
     timeOptions,
   } from "../../utils/chart";
 
-  const stocks = $db ? $db.stocks : [];
-  const stockTypes = $db ? $db.stockTypes : [];
+  // everything using $: reactive statement so they react to changes in the db
+  $: stocks = $db ? $db.stocks : [];
+  $: stockTypes = $db ? $db.stockTypes : [];
 
-  const stockInvestmentsDS = amountByTypeId(stocks, stockTypes, "stockTypeId");
-  const accumulatedStocksDS = cumulativeChart(stocks, "amount").toTimeDataset(
+  $: stockInvestmentsDS = amountByTypeId(stocks, stockTypes, "stockTypeId");
+  $: accumulatedStocksDS = cumulativeChart(stocks, "amount").toTimeDataset(
     "Invested to date"
   );
-  const accumulatedStocksByTypeDS = stockTypes.map((sT) => {
+  $: accumulatedStocksByTypeDS = stockTypes.map((sT) => {
     const filtered = stocks.filter((stock) => stock.stockTypeId === sT.id);
     return cumulativeChart(filtered, "amount").toTimeDataset(sT.name)[0];
   });
 
-  const combined = [...accumulatedStocksDS, ...accumulatedStocksByTypeDS];
+  $: combined = [...accumulatedStocksDS, ...accumulatedStocksByTypeDS];
 </script>
 
 {#if $db}

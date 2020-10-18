@@ -1,6 +1,7 @@
 import type Chart from "chart.js";
 import type { FirestoreTimeStamp } from "../types/db";
 import cumulativeMap from "./cumulativeMap";
+import { merge } from "lodash";
 
 export const amountByTypeId = <
   T extends { date: FirestoreTimeStamp; amount: number }
@@ -31,8 +32,14 @@ export const amountByTypeId = <
   }));
 };
 
-export const timeOptions = (unit: Chart.TimeUnit) => {
-  return { scales: { xAxes: [{ type: "time", time: { unit } }] } };
+export const timeOptions = (
+  unit: Chart.TimeUnit,
+  additionalOptions?: Chart.ChartOptions
+) => {
+  return merge(
+    { scales: { xAxes: [{ type: "time", time: { unit } }] } },
+    additionalOptions
+  );
 };
 
 export const cumulativeChart = <T extends { date: FirestoreTimeStamp }>(

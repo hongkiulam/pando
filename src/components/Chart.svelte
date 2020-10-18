@@ -7,6 +7,7 @@
     primaryLight,
     success,
     danger,
+    medium,
   } from "../utils/cssColors";
   export let title = "";
   export let type: Chart.ChartType = "line";
@@ -22,14 +23,24 @@
 
   const colors = [primary, secondary, success, danger];
 
-  const createChart = () => {
-    const processedDataset = datasets.map((ds, index) => ({
-      backgroundColor: withBackgroundColor ? primaryLight : "transparent",
-      borderColor: colors[index],
-      borderWidth: 1,
-      lineTension: 0,
-      ...ds,
-    }));
+  const createChart = (
+    type,
+    labels,
+    options,
+    datasets,
+    withBackgroundColor
+  ) => {
+    const processedDataset: Chart.ChartDataSets[] = datasets.map(
+      (ds, index) => ({
+        backgroundColor: withBackgroundColor ? primaryLight : "transparent",
+        borderColor: colors[index],
+        borderWidth: 1,
+        lineTension: 0,
+        barThickness: 10,
+        hoverBackgroundColor: medium,
+        ...ds,
+      })
+    );
     const ctx = (document.getElementById(
       chartId
     ) as HTMLCanvasElement).getContext("2d");
@@ -56,7 +67,14 @@
     });
   };
 
-  onMount(createChart);
+  let mounted = false;
+  onMount(() => {
+    mounted = true;
+  });
+
+  $: if (mounted) {
+    createChart(type, labels, options, datasets, withBackgroundColor);
+  }
 </script>
 
 <style>

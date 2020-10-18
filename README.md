@@ -18,15 +18,15 @@ A personal finance app for tracking monthly expenses.
 - [x] finances dont update when navigated to from add finance
 - [] update bills text to say bills for next month etc...
 - [] front page
-- [] charts
+- [x] charts
 - [] export to excel document
 - [] routes to everything
 
 ### Charts
 
-- [] Acc Savings against time
-- [] Acc Spending against time
-- [] Acc Stocks against time
+- [x] Acc Savings against time
+- [x] Acc Spending against time
+- [x] Acc Stocks against time
 
 _Note that you will need to have [Node.js](https://nodejs.org) installed._
 
