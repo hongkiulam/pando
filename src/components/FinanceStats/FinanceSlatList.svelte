@@ -4,6 +4,7 @@
   import { goto } from "@sveltech/routify";
   import { getShortMonth } from "../../utils/date";
   import { DateTime } from "luxon";
+  import { formatCurrency } from "../../utils/formatCurrency";
   import type { Finance } from "../../types/db";
 
   export let finances: Finance[];
@@ -62,11 +63,11 @@
       <div class="slat_header_info">
         <div class="row">
           <small>To spend</small>
-          <h2>£{f.spending}</h2>
+          <h2>{formatCurrency(f.spending)}</h2>
         </div>
         <div class="row">
           <small>To save</small>
-          <h2>£{f.saved}</h2>
+          <h2>{formatCurrency(f.saved)}</h2>
         </div>
       </div>
     </div>
@@ -74,30 +75,30 @@
       {#each f.income as { incomeTypeId, amount }}
         <div class="detail_row">
           <small>{incomeTypes.find((x) => x.id === incomeTypeId).name}</small>
-          <span>£{amount}</span>
+          <span>{formatCurrency(amount)}</span>
         </div>
       {/each}
       {#each f.bills as { billTypeId, amount }}
         <div class="detail_row">
           <small>{billTypes.find((x) => x.id === billTypeId).name}</small>
-          <span>(£{amount})</span>
+          <span>({formatCurrency(amount)})</span>
         </div>
       {/each}
       <div class="detail_row">
         <small>Remaining Saving</small>
-        <span>£{f.remainingSaved}</span>
+        <span>{formatCurrency(f.remainingSaved)}</span>
       </div>
       <div class="detail_row">
         <small>Remaining Spending</small>
-        <span>£{f.remainingSpending}</span>
+        <span>{formatCurrency(f.remainingSpending)}</span>
       </div>
       <div class="detail_row">
         <small>Accumulated Saving</small>
-        <span>£{f.remainingSaved + f.saved}</span>
+        <span>{formatCurrency(f.remainingSaved + f.saved)}</span>
       </div>
       <div class="detail_row">
         <small>Accumulated Spending</small>
-        <span>£{f.remainingSpending + f.spending}</span>
+        <span>{formatCurrency(f.remainingSpending + f.spending)}</span>
       </div>
     </div>
   </Slat>

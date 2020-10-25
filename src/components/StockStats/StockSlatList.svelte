@@ -5,21 +5,17 @@
   import { DateTime } from "luxon";
   import { stocks as stockAction } from "../../actions";
   import { db } from "../../firebase";
+  import { formatCurrency } from "../../utils/formatCurrency";
 
   $: stockTypes = $db ? $db.stockTypes : [];
 
   export let stocks: Stock[];
 
-  /**
-   * @param {Date} date
-   * */
-  const formatDate = (date) => {
+  const formatDate = (date: Date) => {
     return DateTime.fromJSDate(date).toFormat("dd/LL/yy");
   };
-  /**
-   * @param {string} id
-   * */
-  const getStockTypeName = (id) => {
+
+  const getStockTypeName = (id: number) => {
     const sT = stockTypes.find((s) => s.id === id);
     return sT ? sT.name : "";
   };
@@ -59,7 +55,7 @@
       </div>
       <div class="column">
         <small>Amount</small>
-        <h2 class="property">£{s.amount}</h2>
+        <h2 class="property">{formatCurrency(s.amount)}</h2>
       </div>
     </div>
     <div slot="edit-dialog">

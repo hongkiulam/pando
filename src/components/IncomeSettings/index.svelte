@@ -6,6 +6,7 @@
   import EditIncomeType from "./EditIncomeType.svelte";
   import { incomeSettings } from "../../actions";
   import { getRecurString } from "../../utils/date";
+  import { formatCurrency } from "../../utils/formatCurrency";
 
   $: incomeTypes = $db ? $db.incomeTypes : [];
 
@@ -63,7 +64,7 @@
       </div>
       <div class="column">
         <small>Default</small>
-        <h2 class="property">£{iT.default}</h2>
+        <h2 class="property">{formatCurrency(iT.default)}</h2>
       </div>
     </div>
     <div slot="open">

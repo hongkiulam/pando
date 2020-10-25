@@ -12,9 +12,9 @@
   export let title = "";
   export let type: Chart.ChartType = "line";
   export let labels: string[];
-  export let options: object = {};
+  export let options: Chart.ChartOptions = {};
   export let datasets: Chart.ChartDataSets[];
-  export let withBackgroundColor = false;
+  export let withBackgroundColor: boolean = false;
 
   const chartId = Math.random().toString();
   const vw = window.innerWidth;
@@ -24,11 +24,11 @@
   const colors = [primary, secondary, success, danger];
 
   const createChart = (
-    type,
-    labels,
-    options,
-    datasets,
-    withBackgroundColor
+    type: Chart.ChartType,
+    labels: string[],
+    options: Chart.ChartOptions,
+    datasets: Chart.ChartDataSets[],
+    withBackgroundColor: boolean
   ) => {
     const processedDataset: Chart.ChartDataSets[] = datasets.map(
       (ds, index) => ({

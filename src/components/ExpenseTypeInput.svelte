@@ -38,6 +38,7 @@
     align-items: center;
     :global(.mdc-select) {
       flex: 1;
+      min-width: 150px;
       margin-right: var(--paddingS);
     }
   }

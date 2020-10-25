@@ -5,10 +5,11 @@
   import { params } from "@sveltech/routify";
   import { url } from "../../store";
   import { db } from "../../firebase";
+  import type { Finance } from "../../types/db";
   $url = "/edit";
   $: financeId = $params.id;
   $: finances = $db ? $db.finance : [];
-  let initialFinance;
+  let initialFinance: Finance;
   $: initialFinance = finances.find((f) => f.id === Number(financeId));
 </script>
 

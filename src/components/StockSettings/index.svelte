@@ -5,6 +5,7 @@
   import Slat from "../Slat.svelte";
   import EditStockType from "./EditStockType.svelte";
   import { stockSettings } from "../../actions";
+  import { formatCurrency } from "../../utils/formatCurrency";
 
   $: stockTypes = $db ? $db.stockTypes : [];
 
@@ -58,7 +59,7 @@
       </div>
       <div class="column">
         <small>Default</small>
-        <h2 class="property">£{sT.default}</h2>
+        <h2 class="property">{formatCurrency(sT.default)}</h2>
       </div>
     </div>
     <div slot="edit-dialog">

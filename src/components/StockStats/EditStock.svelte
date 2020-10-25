@@ -3,7 +3,6 @@
   import TextField from "@smui/textfield";
   import SaveCancelButtonGroup from "../SaveCancelButtonGroup.svelte";
   import StockTypeSelect from "../StockTypeSelect.svelte";
-  import { db } from "../../firebase";
 
   // import type { Stock } from "../../types/db";
   import { stocks } from "../../actions";

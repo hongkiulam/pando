@@ -6,6 +6,7 @@
   import Slat from "../Slat.svelte";
   import EditBillType from "./EditBillType.svelte";
   import { getRecurString } from "../../utils/date";
+  import { formatCurrency } from "../../utils/formatCurrency";
   $: billTypes = $db ? $db.billTypes : [];
 
   let addDialog;
@@ -62,7 +63,7 @@
       </div>
       <div class="column">
         <small>Default</small>
-        <h2 class="property">£{bT.default}</h2>
+        <h2 class="property">{formatCurrency(bT.default)}</h2>
       </div>
     </div>
     <div slot="open">
