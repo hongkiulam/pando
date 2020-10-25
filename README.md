@@ -21,6 +21,7 @@ A personal finance app for tracking monthly expenses.
 - [x] charts
 - [] export to excel document
 - [] routes to everything
+- [] stock stats open state, show more details
 
 ### Charts
 

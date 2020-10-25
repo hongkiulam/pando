@@ -6,6 +6,7 @@
   import { stocks as stockAction } from "../../actions";
   import { db } from "../../firebase";
   import { formatCurrency } from "../../utils/formatCurrency";
+  import { getShortMonth } from "../../utils/date";
 
   $: stockTypes = $db ? $db.stockTypes : [];
 
@@ -24,7 +25,7 @@
 <style>
   .main_display {
     display: grid;
-    grid-template-columns: minmax(100px, 1fr) 1fr 1fr;
+    grid-template-columns: 1fr minmax(100px, 1fr) 1fr;
     gap: var(--paddingS);
   }
   .column {
@@ -46,8 +47,8 @@
     }}>
     <div class="main_display">
       <div class="column">
-        <small>Date</small>
-        <h2 class="property">{formatDate(s.date.toDate())}</h2>
+        <small>Month</small>
+        <h2 class="property">{getShortMonth(s.date)}</h2>
       </div>
       <div class="column">
         <small>Type</small>
