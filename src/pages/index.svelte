@@ -3,9 +3,11 @@
   import { url } from "../store";
   import Card from "../components/Card.svelte";
   import { formatCurrency } from "../utils/formatCurrency";
+  import { getNextExpenseTypes } from "../utils/getNextExpenseTypes";
   $url = "/";
   $: finances = $db ? $db.finance : [];
   $: stocks = $db ? $db.stocks : [];
+  $: billTypes = $db ? $db.billTypes : [];
   $: totalInvested = stocks.reduce((acc, curr) => acc + curr.amount, 0);
 
   $: earnedToDate = () => {
@@ -16,11 +18,18 @@
     return earned;
   };
 
+  $: estimatedNextBill = () => {
+    return getNextExpenseTypes(billTypes).reduce(
+      (acc, curr) => acc + curr.default,
+      0
+    );
+  };
+
   const daysUntilNextPayment = () => {
     const today = new Date();
     const firstOfNext = new Date(today.getMonth() + 1);
     firstOfNext.setDate(0);
-    return firstOfNext.getDate() - today.getDate() - 1;
+    return firstOfNext.getDate() - today.getDate();
   };
 </script>
 
@@ -46,6 +55,9 @@
     small />
   <Card
     data={[{ title: 'Earned to date', content: formatCurrency(earnedToDate()) }]}
+    small />
+  <Card
+    data={[{ title: 'Estimated next bills', content: formatCurrency(estimatedNextBill()) }]}
     small />
 
 </div>

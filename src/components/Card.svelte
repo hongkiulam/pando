@@ -25,6 +25,9 @@
     border-radius: 20px;
     padding: var(--padding);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     animation-duration: 400ms !important;
     @include staggerAnimation();
   }

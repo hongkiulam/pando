@@ -8,6 +8,7 @@
     isoToTimestamp,
     timeStampToISO,
   } from "../utils/date";
+  import { getNextExpenseTypes } from "../utils/getNextExpenseTypes";
 
   /**
    * @type function(finance)
@@ -19,32 +20,21 @@
   const incomeTypes = $db ? $db.incomeTypes : [];
   const splitRatio = $db ? $db.splitRatio : 80;
 
-  /**
-   * Gets the types which are applicable to the current date
-   *
-   * gets all types which are monthly
-   *
-   * gets all types which are yearly and the current month matches the recurring month
-   *
-   * */
-  const filterTypes = (types, idKey) => {
-    return types
-      .filter((type) => {
-        if (type.frequency === "MONTHLY") {
-          return true;
-        }
-        if (type.frequency === "YEARLY") {
-          const monthToApply = type.startDate.toDate().getMonth();
-          const thisMonth = new Date().getMonth();
-          return monthToApply === thisMonth;
-        }
-      })
-      .map((type) => {
-        return { amount: type.default, [idKey]: type.id };
-      });
+  const mapNextExpenseTypeToFinanceProperty = (types, idKey) => {
+    return getNextExpenseTypes(types).map((type) => ({
+      amount: type.default,
+      [idKey]: type.id,
+    }));
   };
-  const defaultBillTypes = filterTypes(billTypes, "billTypeId");
-  const defaultIncomeTypes = filterTypes(incomeTypes, "incomeTypeId");
+
+  const defaultBillTypes = mapNextExpenseTypeToFinanceProperty(
+    billTypes,
+    "billTypeId"
+  );
+  const defaultIncomeTypes = mapNextExpenseTypeToFinanceProperty(
+    incomeTypes,
+    "incomeTypeId"
+  );
 
   let modified = initialFinance.saved
     ? initialFinance
@@ -134,7 +124,7 @@
   <Button
     color="secondary"
     variant="raised"
-    href='/stats'
+    href="/stats"
     on:click={() => {
       modified = { ...modified, saved, spending, accSaved, accSpending };
       onFinish(modified);
