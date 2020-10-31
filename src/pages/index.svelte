@@ -8,11 +8,11 @@
   $: finances = $db ? $db.finance : [];
   $: stocks = $db ? $db.stocks : [];
   $: billTypes = $db ? $db.billTypes : [];
-  $: totalInvested = stocks.reduce((acc, curr) => acc + curr.amount, 0);
+  $: totalInvested = stocks.reduce((acc, curr) => acc + curr?.amount, 0);
 
   $: earnedToDate = () => {
     const earned = finances.reduce((acc, curr) => {
-      const thisMonthsIncome = curr.income.reduce((a, c) => a + c.amount, 0);
+      const thisMonthsIncome = curr?.income?.reduce((a, c) => a + c.amount, 0);
       return acc + thisMonthsIncome;
     }, 0);
     return earned;
@@ -20,7 +20,7 @@
 
   $: estimatedNextBill = () => {
     return getNextExpenseTypes(billTypes).reduce(
-      (acc, curr) => acc + curr.default,
+      (acc, curr) => acc + curr?.default,
       0
     );
   };
@@ -45,7 +45,7 @@
 <!-- <pre>{JSON.stringify($db, null, 2)}</pre> -->
 <div class="container">
   <Card
-    data={[{ title: 'Total saved', content: formatCurrency(finances[0].accSaved) }, { title: 'Allocated spending', content: formatCurrency(finances[0].accSpending) }]}
+    data={[{ title: 'Total saved', content: formatCurrency(finances[0]?.accSaved) }, { title: 'Allocated spending', content: formatCurrency(finances[0]?.accSpending) }]}
     fancy />
   <Card
     data={[{ title: 'Next payment in', content: daysUntilNextPayment().toString() + ' days' }]}
