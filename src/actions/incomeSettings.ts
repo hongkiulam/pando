@@ -1,12 +1,14 @@
-import { dbRef, db } from "../firebase";
+import { docRef, db } from "../firebase";
 import type { IncomeType } from "../types/db";
 import { createIncomeTypeId } from "../utils/idGenerator";
 import { pushToast } from "./toast";
 
 let incomeTypes: IncomeType[];
-const u = db.subscribe((d) => {
+db.subscribe((d) => {
   incomeTypes = d?.incomeTypes;
 });
+let doc;
+docRef.subscribe((x) => (doc = x));
 
 export const update = (incomeSetting: IncomeType) => {
   const errorTimeout = setTimeout(() => {
@@ -18,7 +20,7 @@ export const update = (incomeSetting: IncomeType) => {
     (iT) => iT.id === incomeSetting.id
   );
   newIncomeTypes.splice(indexToUpdate, 1, incomeSetting);
-  dbRef
+  doc
     .update({
       incomeTypes: newIncomeTypes,
     })
@@ -35,7 +37,7 @@ export const remove = (incomeSetting: IncomeType) => {
   let newIncomeTypes: IncomeType[] = [...incomeTypes].filter(
     (iT) => iT.id !== incomeSetting.id
   );
-  dbRef
+  doc
     .update({
       incomeTypes: newIncomeTypes,
     })
@@ -51,7 +53,7 @@ export const add = (incomeSetting: IncomeType) => {
 
   const incomeSettingWithId = { ...incomeSetting, id: createIncomeTypeId() };
   let newIncomeTypes = [...incomeTypes, incomeSettingWithId];
-  dbRef
+  doc
     .update({
       incomeTypes: newIncomeTypes,
     })

@@ -1,12 +1,14 @@
-import { dbRef, db } from "../firebase";
+import { docRef, db } from "../firebase";
 import type { BillType } from "../types/db";
 import { createBillTypeId } from "../utils/idGenerator";
 import { pushToast } from "./toast";
 
 let billTypes: BillType[];
-const u = db.subscribe((d) => {
+db.subscribe((d) => {
   billTypes = d?.billTypes;
 });
+let doc;
+docRef.subscribe((x) => (doc = x));
 
 export const update = (billSetting: BillType) => {
   const errorTimeout = setTimeout(() => {
@@ -18,7 +20,7 @@ export const update = (billSetting: BillType) => {
     (bT) => bT.id === billSetting.id
   );
   newBillTypes.splice(indexToUpdate, 1, billSetting);
-  dbRef
+  doc
     .update({
       billTypes: newBillTypes,
     })
@@ -35,7 +37,7 @@ export const remove = (billSetting: BillType) => {
   let newBillTypes: BillType[] = [...billTypes].filter(
     (bT) => bT.id !== billSetting.id
   );
-  dbRef
+  doc
     .update({
       billTypes: newBillTypes,
     })
@@ -51,7 +53,7 @@ export const add = (billSetting: BillType) => {
 
   const billSettingWithId = { ...billSetting, id: createBillTypeId() };
   let newBillTypes = [...billTypes, billSettingWithId];
-  dbRef
+  doc
     .update({
       billTypes: newBillTypes,
     })

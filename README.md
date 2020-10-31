@@ -7,21 +7,24 @@ A personal finance app for tracking monthly expenses.
 ### TODO
 
 - [x] make pwa ready
-- [] fix typescript untyped modules
+- [ ] fix typescript untyped modules
 - [x] isActive navigation
 - [x] actions for getting? and setting firestore
 - [x] bill type, income type, stock type all reference id instead
-- [] should have a dynamic route for editing finance and stock data? edit/:id
-- [] ~~stock addition and editing can be done in a modal~~
+- [x] should have a dynamic route for editing finance and stock data? edit/:id
+- [x] ~~stock addition and editing can be done in a modal~~
 - [x] add stock setting tab
 - [x] when changing expense type in dropdown, update amount to default amount
 - [x] finances dont update when navigated to from add finance
-- [] update bills text to say bills for next month etc...
-- [] front page
+- [ ] update bills text to say bills for next month etc...
+- [x] front page
 - [x] charts
-- [] export to excel document
-- [] routes to everything
-- [] stock stats open state, show more details
+- [ ] export to excel document
+- [ ] routes to everything
+- [x] stock stats open state, show more details
+- [x] firebase guest account
+- [x] writable db, tracks onsnapshot
+- [x] actions reference correct document
 
 ### Charts
 

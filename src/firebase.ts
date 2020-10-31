@@ -2,7 +2,10 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import { writable } from "svelte/store";
+import type { Record } from "./types/db";
 
+const MY_UID = "aPn5vIFup3gPNn5wdIyRfvY4HT73";
 const firebaseConfig = {
   apiKey: "AIzaSyDWj5tK3twgNatmr6uAWmjBfR-3Dz68YLA",
   authDomain: "pando-f7e5f.firebaseapp.com",
@@ -15,13 +18,22 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
 const firestore = firebase.firestore;
-const dbRef = firebase.firestore().collection("records").doc("me");
-import { readable } from "svelte/store";
-import type { Record } from "./types/db";
-const db = readable<Record>(null, (set) => {
-  dbRef.onSnapshot((doc) => {
-    set(doc.data() as Record);
+const docRef = writable(
+  firebase.firestore().collection("records").doc("guest")
+);
+const db = writable<Record>(null);
+
+const setDB = (docName: "me" | "guest") => {
+  docRef.set(firebase.firestore().collection("records").doc(docName));
+  let doc;
+  docRef.subscribe((x) => (doc = x));
+  doc.onSnapshot((doc) => {
+    db.set(doc.data() as Record);
   });
-});
-export { db, dbRef, firestore };
+};
+
+const auth = firebase.auth();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+export { db, docRef, firestore, auth, googleProvider, setDB, MY_UID };

@@ -1,13 +1,14 @@
-import { dbRef, db } from "../firebase";
-import type {  Stock } from "../types/db";
+import { docRef, db } from "../firebase";
+import type { Stock } from "../types/db";
 import { createStockId } from "../utils/idGenerator";
 import { pushToast } from "./toast";
 
 let stocks: Stock[];
-const u = db.subscribe((d) => {
+db.subscribe((d) => {
   stocks = d?.stocks;
 });
-
+let doc;
+docRef.subscribe((x) => (doc = x));
 export const update = (s: Stock) => {
   const errorTimeout = setTimeout(() => {
     pushToast("Error updating Stock entry within 3s");
@@ -16,7 +17,7 @@ export const update = (s: Stock) => {
   let newStocks = [...stocks];
   const indexToUpdate = newStocks.findIndex((x) => x.id === s.id);
   newStocks.splice(indexToUpdate, 1, s);
-  dbRef
+  doc
     .update({
       stocks: newStocks,
     })
@@ -31,7 +32,7 @@ export const remove = (s: Stock) => {
   }, 3000);
 
   let newStocks = [...stocks].filter((x) => x.id !== s.id);
-  dbRef
+  doc
     .update({
       stocks: newStocks,
     })
@@ -50,7 +51,7 @@ export const add = (s: Stock) => {
     return b.date.toMillis() - a.date.toMillis();
   });
 
-  dbRef
+  doc
     .update({
       stocks: newStocks,
     })

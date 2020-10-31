@@ -1,12 +1,14 @@
-import { dbRef, db } from "../firebase";
+import { docRef, db } from "../firebase";
 import type { Finance } from "../types/db";
 import { createFinanceId } from "../utils/idGenerator";
 import { pushToast } from "./toast";
 
 let finance: Finance[];
-const u = db.subscribe((d) => {
+db.subscribe((d) => {
   finance = d?.finance;
 });
+let doc;
+docRef.subscribe((x) => (doc = x));
 
 export const update = (f: Finance) => {
   const errorTimeout = setTimeout(() => {
@@ -16,7 +18,7 @@ export const update = (f: Finance) => {
   let newFinance = [...finance];
   const indexToUpdate = newFinance.findIndex((x) => x.id === f.id);
   newFinance.splice(indexToUpdate, 1, f);
-  dbRef
+  doc
     .update({
       finance: newFinance,
     })
@@ -31,7 +33,7 @@ export const remove = (f: Finance) => {
   }, 3000);
 
   let newFinance = [...finance].filter((x) => x.id !== f.id);
-  dbRef
+  doc
     .update({
       finance: newFinance,
     })
@@ -50,7 +52,7 @@ export const add = (f: Finance) => {
     return b.date.toMillis() - a.date.toMillis();
   });
 
-  dbRef
+  doc
     .update({
       finance: newFinance,
     })
