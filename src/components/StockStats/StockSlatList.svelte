@@ -38,6 +38,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 </style>
 
 {#each stocks as s}
@@ -57,6 +62,16 @@
       <div class="column">
         <small>Amount</small>
         <h2 class="property">{formatCurrency(s.amount)}</h2>
+      </div>
+    </div>
+    <div slot="open">
+      <div class="row">
+        <small>Investment type</small>
+        <span>{getStockTypeName(s.stockTypeId)}</span>
+      </div>
+      <div class="row">
+        <small>Investment date</small>
+        <span>{formatDate(s.date.toDate())}</span>
       </div>
     </div>
     <div slot="edit-dialog">
