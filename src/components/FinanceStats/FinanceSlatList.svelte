@@ -14,6 +14,18 @@
   const getShortYear = (date: Date) => {
     return DateTime.fromJSDate(date).toFormat("yyyy");
   };
+
+  const getNetIncome = (finance: Finance) => {
+    const totalIncome = finance.income.reduce(
+      (acc, curr) => acc + curr.amount,
+      0
+    );
+    const totalBills = finance.bills.reduce(
+      (acc, curr) => acc + curr.amount,
+      0
+    );
+    return totalIncome - totalBills;
+  };
 </script>
 
 <style lang="scss">
@@ -84,6 +96,10 @@
           <span>({formatCurrency(amount)})</span>
         </div>
       {/each}
+      <div class="detail_row">
+        <small>Net Income</small>
+        <span>{formatCurrency(getNetIncome(f))}</span>
+      </div>
       <div class="detail_row">
         <small>Remaining Saving</small>
         <span>{formatCurrency(f.remainingSaved)}</span>

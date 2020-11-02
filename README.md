@@ -16,7 +16,7 @@ A personal finance app for tracking monthly expenses.
 - [x] add stock setting tab
 - [x] when changing expense type in dropdown, update amount to default amount
 - [x] finances dont update when navigated to from add finance
-- [ ] update bills text to say bills for next month etc...
+- [x] ~~update bills text to say bills for next month etc...~~
 - [x] front page
 - [x] charts
 - [ ] export to excel document
@@ -25,6 +25,7 @@ A personal finance app for tracking monthly expenses.
 - [x] firebase guest account
 - [x] writable db, tracks onsnapshot
 - [x] actions reference correct document
+- [x] ~~notifications cancelled~~
 
 ### Charts
 
