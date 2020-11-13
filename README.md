@@ -26,6 +26,7 @@ A personal finance app for tracking monthly expenses.
 - [x] writable db, tracks onsnapshot
 - [x] actions reference correct document
 - [x] ~~notifications cancelled~~
+- [ ] desktop styling
 
 ### Charts
 
@@ -72,4 +73,8 @@ If you're building a single-page app (SPA) with multiple routes, sirv needs to b
 
 ```js
 "start": "sirv public --single"
+```
+
+```
+
 ```

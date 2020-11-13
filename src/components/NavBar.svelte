@@ -12,6 +12,7 @@
 
 <style>
   .nav {
+    grid-area: nav;
     display: flex;
     flex-direction: row;
     justify-content: space-around;

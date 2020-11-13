@@ -2,7 +2,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { writable } from "svelte/store";
+import { writable, readable } from "svelte/store";
 import type { Record } from "./types/db";
 
 const MY_UID = "aPn5vIFup3gPNn5wdIyRfvY4HT73";
@@ -20,17 +20,27 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore;
-const docRef = writable(
+
+const _docRef = writable(
   firebase.firestore().collection("records").doc("guest")
 );
-const db = writable<Record>(null);
+const docRef = readable(
+  firebase.firestore().collection("records").doc("guest"),
+  (set) => {
+    _docRef.subscribe(set);
+  }
+);
+
+const _db = writable<Record>(null);
+const db = readable<Record>(null, (set) => {
+  _db.subscribe(set);
+});
 
 const setDB = (docName: "me" | "guest") => {
-  docRef.set(firebase.firestore().collection("records").doc(docName));
-  let doc;
-  docRef.subscribe((x) => (doc = x));
+  const doc = firebase.firestore().collection("records").doc(docName);
+  _docRef.set(doc);
   doc.onSnapshot((doc) => {
-    db.set(doc.data() as Record);
+    _db.set(doc.data() as Record);
   });
 };
 

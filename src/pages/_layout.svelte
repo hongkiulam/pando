@@ -32,10 +32,12 @@
     grid-template-rows: var(--barHeight) calc(100% - (var(--barHeight) * 2)) var(
         --barHeight
       );
+    grid-template-areas: "topbar" "body" "nav";
     width: 100%;
     height: 100%;
   }
   .body {
+    grid-area: body;
     display: flex;
     flex-direction: column;
     height: 100%;

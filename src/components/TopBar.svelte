@@ -12,6 +12,7 @@
 
 <style>
   .topbar {
+    grid-area: topbar;
     display: grid;
     grid-template-columns: 40px auto 40px;
     align-items: center;
