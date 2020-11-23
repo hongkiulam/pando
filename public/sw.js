@@ -1,5 +1,5 @@
 let cacheName = "pando-finance";
-let filesToCache = ["/"];
+let filesToCache = ["/index.html", "/global.css"];
 
 /* Start the service worker and cache all of the app's content */
 self.addEventListener("install", function (e) {
