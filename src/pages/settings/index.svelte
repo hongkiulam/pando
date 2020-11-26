@@ -5,7 +5,7 @@
   import BillSettings from "../../components/BillSettings/index.svelte";
   import StockSettings from "../../components/StockSettings/index.svelte";
   import SplitRatioSettings from "../../components/SplitRatioSettings.svelte";
-  import Logout from "../../components/Logout.svelte";
+  import AccountSettings from "../../components/AccountSettings/index.svelte";
   import PageContainer from "../../components/PageContainer.svelte";
   let selectedTab = "Income";
   const tabs = ["Income", "Bills", "Stocks", "Split Ratio", "Account"];
@@ -14,7 +14,7 @@
     Bills: BillSettings,
     Stocks: StockSettings,
     "Split Ratio": SplitRatioSettings,
-    Account: Logout,
+    Account: AccountSettings,
   };
   import { url } from "../../store";
   $url = "/settings";

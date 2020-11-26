@@ -1,5 +1,6 @@
 <script lang="ts">
   export let full: boolean;
+  export let inline: boolean;
 </script>
 
 <style>
@@ -15,6 +16,9 @@
     height: 100%;
     width: 100%;
   }
+  .inline {
+    padding: var(--paddingS);
+  }
   @keyframes pulse {
     from {
       opacity: 1;
@@ -25,6 +29,6 @@
   }
 </style>
 
-<div class="container" class:full>
+<div class="container" class:full class:inline>
   <img src="/assets/logo.svg" alt="..." width="20px" height="20px" />
 </div>

@@ -1,5 +1,5 @@
 <script>
-  import { auth } from "../firebase";
+  import { auth } from "../../firebase";
   import { goto } from "@sveltech/routify";
   import Button from "@smui/button";
 </script>

@@ -4,6 +4,7 @@ import * as incomeSettings from "./incomeSettings";
 import * as stockSettings from "./stockSettings";
 import * as finance from "./finance";
 import * as stocks from "./stocks";
+import * as vg from "./vanguard";
 
 export {
   splitRatio,
@@ -12,4 +13,5 @@ export {
   stockSettings,
   finance,
   stocks,
+  vg,
 };

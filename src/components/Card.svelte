@@ -1,9 +1,11 @@
 <script lang="ts">
   import { fly } from "svelte/transition";
+  import Loading from "./Loading.svelte";
 
   export let data: { title: string; content: string }[] = [];
   export let small: boolean = false;
   export let fancy: boolean = false;
+  export let loading: boolean = false;
 
   const cardAnimationOptions = {
     x: -20,
@@ -67,7 +69,9 @@
 <div class="card" class:small class:fancy in:fly={cardAnimationOptions}>
   {#each data as { title, content }}
     <span class="card_title">{title}</span>
-    {#if fancy}
+    {#if loading}
+      <Loading inline />
+    {:else if fancy}
       <h1>{content}</h1>
     {:else}
       <h2>{content}</h2>
