@@ -13,7 +13,7 @@ export const get = async (resource: Resource) => {
     currentState = vg;
   });
   unsubscribe();
-  if (currentState.data[resource]) return; // we have already fetched resource this session
+  if (currentState.data[resource] || currentState.loading) return; // we have already fetched resource this session
 
   vanguard.set({
     ...currentState,
