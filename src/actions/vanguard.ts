@@ -46,7 +46,7 @@ export const get = async (resource: Resource) => {
 };
 
 export const authorise = async (username: string, password: string) => {
-  const response = await fetch(`${api}/performance`, {
+  const response = await fetch(`${api}/authorise`, {
     method: "HEAD",
     headers: {
       Authorization: `Basic ${btoa(username + ":" + password)}`,
