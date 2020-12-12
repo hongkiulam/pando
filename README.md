@@ -1,4 +1,4 @@
-## Pando Finance
+![hero](./images/hero.png)
 
 #### Using Svelte, Typescript, Routify, Firebase, Netlify, PWA
 
