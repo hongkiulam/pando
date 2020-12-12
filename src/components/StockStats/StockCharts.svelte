@@ -1,11 +1,14 @@
 <script lang="ts">
   import Chart from "../Chart.svelte";
+  import Loading from "../Loading.svelte";
   import { db } from "../../firebase";
+  import { vanguard } from "../../store";
   import {
     amountByTypeId,
     cumulativeChart,
     timeOptions,
   } from "../../utils/chart";
+  import { vg } from "../../actions";
 
   // everything using $: reactive statement so they react to changes in the db
   $: stocks = $db ? $db.stocks : [];
@@ -21,8 +24,26 @@
   });
 
   $: combined = [...accumulatedStocksDS, ...accumulatedStocksByTypeDS];
+  vg.get("valuationHistory");
+  $: valuationHistoryDS = [
+    {
+      label: "Valuation History",
+      data: $vanguard.data.valuationHistory?.map((item) => {
+        return { x: new Date(item.date), y: item.value };
+      }),
+      pointRadius: 0,
+    },
+  ];
 </script>
 
+{#if $vanguard.loading}
+  <Loading />
+{:else}
+  <Chart
+    title="Valuation History"
+    datasets={valuationHistoryDS}
+    options={timeOptions('day', { tooltips: { mode: 'x-axis' } })} />
+{/if}
 {#if $db}
   <Chart
     title="Stock Investments"

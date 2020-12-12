@@ -27,6 +27,7 @@ A personal finance app for tracking monthly expenses.
 - [x] actions reference correct document
 - [x] ~~notifications cancelled~~
 - [ ] desktop styling
+- [x] Vanguard login modal on /settings -> Account
 
 ### Charts
 
