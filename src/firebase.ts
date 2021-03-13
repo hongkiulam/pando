@@ -36,10 +36,12 @@ const db = readable<Record>(null, (set) => {
   _db.subscribe(set);
 });
 
+let unsubscribeFromDB = () => {};
 const setDB = (docName: "me" | "guest") => {
+  unsubscribeFromDB();
   const doc = firebase.firestore().collection("records").doc(docName);
   _docRef.set(doc);
-  doc.onSnapshot((doc) => {
+  unsubscribeFromDB = doc.onSnapshot((doc) => {
     _db.set(doc.data() as Record);
   });
 };

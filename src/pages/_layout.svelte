@@ -4,8 +4,8 @@
   import TopBar from "../components/TopBar.svelte";
   import Loading from "../components/Loading.svelte";
   import Login from "../components/Login.svelte";
-  import { db, auth, MY_UID, setDB } from "../firebase";
-  import { toast } from "../store";
+  import { db } from "../firebase";
+  import { toast, user } from "../store";
 
   let kitchen;
 
@@ -13,17 +13,6 @@
     kitchen.push($toast);
     $toast = null;
   }
-
-  let user;
-  auth.onAuthStateChanged((u) => (user = u));
-  $: if (user) {
-    if (user.uid === MY_UID) {
-      setDB("me");
-    } else {
-      setDB("guest");
-    }
-  }
-  $: isGuest = user && user.uid !== MY_UID;
 </script>
 
 <style>
@@ -60,10 +49,10 @@
 <div class="app">
   <TopBar />
   <div class="body">
-    {#if isGuest}
+    {#if $user.isGuest}
       <span class="demo_account">Using demo account</span>
     {/if}
-    {#if !user}
+    {#if !$user.uid}
       <Login />
     {:else if $db}
       <slot />
@@ -71,7 +60,7 @@
       <Loading full />
     {/if}
   </div>
-  {#if user}
+  {#if $user.uid}
     <NavBar />
   {/if}
 </div>

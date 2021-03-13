@@ -2,6 +2,7 @@ import { readable, writable } from "svelte/store";
 import type { URL } from "../types/url";
 import type { Toast } from "../types/toast";
 import type { VGState } from "../types/vanguard";
+import { auth, MY_UID, setDB } from "../firebase";
 
 export const url = writable<URL>(window.location.pathname as URL);
 export const toast = writable<Toast>(null);
@@ -19,3 +20,24 @@ export const vanguardLoggedIn = readable(false, (set) => {
     set(!!cred.username && !!cred.password);
   });
 });
+export const user = readable(
+  {
+    uid: "",
+    isGuest: true,
+  },
+  (set) => {
+    auth.onAuthStateChanged((u) => {
+      set({
+        uid: u?.uid || "",
+        isGuest: u?.uid !== MY_UID,
+      });
+      if (u) {
+        if (u.uid === MY_UID) {
+          setDB("me");
+        } else {
+          setDB("guest");
+        }
+      }
+    });
+  }
+);

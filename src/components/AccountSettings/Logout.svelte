@@ -2,6 +2,8 @@
   import { auth } from "../../firebase";
   import { goto } from "@sveltech/routify";
   import Button from "@smui/button";
+  import Loading from "../Loading.svelte";
+  let isLoggingOut = false;
 </script>
 
 <style>
@@ -19,12 +21,20 @@
 
 <div class="container">
   <span>Logged in as: {auth.currentUser.displayName || 'Guest'}</span>
-  <Button
-    variant="raised"
-    on:click={() => {
-      auth.signOut();
-      $goto('/');
-    }}>
-    Sign out
-  </Button>
+  {#if isLoggingOut}
+    <Loading inline />
+  {:else}
+    <Button
+      variant="raised"
+      on:click={() => {
+        isLoggingOut = true;
+        auth.signOut().then(() => {
+          isLoggingOut = false;
+          $goto('/');
+        });
+      }}
+    >
+      Sign out
+    </Button>
+  {/if}
 </div>
