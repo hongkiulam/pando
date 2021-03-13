@@ -1,6 +1,6 @@
 <script lang="ts">
   import { db } from "../firebase";
-  import { url, vanguard, vanguardLoggedIn } from "../store";
+  import { url, user, vanguard, vanguardLoggedIn } from "../store";
   import Card from "../components/Card.svelte";
   import { formatCurrency } from "../utils/formatCurrency";
   import { getNextExpenseTypes } from "../utils/getNextExpenseTypes";
@@ -33,7 +33,9 @@
     return firstOfNext.getDate() - today.getDate();
   };
 
-  vg.get("performance");
+  if (!$user.isGuest) {
+    vg.get("performance");
+  }
 
   $: vanguardCardData = [
     {
@@ -69,18 +71,25 @@
 <div class="container">
   <Card
     data={[{ title: 'Total saved', content: formatCurrency(finances[0]?.accSaved) }, { title: 'Allocated spending', content: formatCurrency(finances[0]?.accSpending) }]}
-    fancy />
+    fancy
+  />
   <Card
     data={[{ title: 'Next payment in', content: daysUntilNextPayment().toString() + ' days' }]}
-    small />
+    small
+  />
   <Card
     data={[{ title: 'Total invested', content: formatCurrency(totalInvested) }]}
-    small />
+    small
+  />
   <Card
     data={[{ title: 'Earned to date', content: formatCurrency(earnedToDate()) }]}
-    small />
+    small
+  />
   <Card
     data={[{ title: 'Est. next bills', content: formatCurrency(estimatedNextBill()) }]}
-    small />
-  <Card data={vanguardCardData} loading={$vanguard.loading} />
+    small
+  />
+  {#if !$user.isGuest}
+    <Card data={vanguardCardData} loading={$vanguard.loading} />
+  {/if}
 </div>
